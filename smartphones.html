@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marat.kz - Смартфондар</title>
+    <style>
+        /* Жалпы стильдер */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Үстіңгі баған (Header) */
+        header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 50%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px 0 0 25px;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        /* Навигация */
+        nav {
+            background-color: #333;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: background 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #555;
+        }
+        
+        /* Баннер */
+        .page-banner {
+            height: 200px;
+            background: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .page-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .page-banner h1 {
+            position: relative;
+            z-index: 1;
+            font-size: 42px;
+        }
+        
+        /* Фильтрлер */
+        .filters {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-option {
+            padding: 8px 15px;
+            background-color: #f5f5f5;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .filter-option:hover, .filter-option.active {
+            background-color: #6e8efb;
+            color: white;
+        }
+        
+        /* Өнімдер тізімі */
+        .products-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: #333;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: pointer;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #6e8efb;
+            margin-bottom: 15px;
+        }
+        
+        .product-btn {
+            display: block;
+            text-align: center;
+            background-color: #6e8efb;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .product-btn:hover {
+            background-color: #5a7df5;
+        }
+        
+        /* Өнім туралы толық ақпарат модальды терезесі */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            position: relative;
+            animation: modalopen 0.5s;
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-image {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .modal-image img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        
+        .modal-title {
+            flex: 2;
+            padding-left: 30px;
+        }
+        
+        .modal-title h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .modal-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6e8efb;
+            margin-bottom: 15px;
+        }
+        
+        .modal-body {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .modal-specs {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .modal-specs h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+        
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specs-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .specs-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .specs-table td:first-child {
+            font-weight: bold;
+            width: 40%;
+            color: #555;
+        }
+        
+        .modal-actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .modal-btn {
+            display: inline-block;
+            background-color: #6e8efb;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: background 0.3s;
+        }
+        
+        .modal-btn:hover {
+            background-color: #5a7df5;
+        }
+        
+        .modal-btn.secondary {
+            background-color: #333;
+        }
+        
+        .modal-btn.secondary:hover {
+            background-color: #555;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: #222;
+            color: #aaa;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+        
+        /* Жауапты дизайн */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 20px;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            .page-banner h1 {
+                font-size: 32px;
+            }
+            
+            .modal-header {
+                flex-direction: column;
+            }
+            
+            .modal-title {
+                padding-left: 0;
+                margin-top: 20px;
+                text-align: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Үстіңгі баған (Header) -->
+    <header>
+        <div class="container header-content">
+            <div class="logo"><a href="index.html">Marat.kz</a></div>
+            <div class="search-bar">
+                <input type="text" placeholder="Телефонды іздеу...">
+                <button>Іздеу</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Навигация -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Басты бет</a></li>
+                <li><a href="smartphones.html" class="active">Смартфондар</a></li>
+                <li><a href="accessories.html">Аксессуарлар</a></li>
+                <li><a href="services.html">Жедел қызмет</a></li>
+                <li><a href="contact.html">Байланыс</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Баннер -->
+    <section class="page-banner">
+        <h1>Смартфондар</h1>
+    </section>
+    
+    <!-- Фильтрлер -->
+    <div class="container">
+        <div class="filters">
+            <div class="filter-group">
+                <h3>Бренд</h3>
+                <div class="filter-options">
+                    <div class="filter-option active">Барлығы</div>
+                    <div class="filter-option">Apple</div>
+                    <div class="filter-option">Samsung</div>
+                    <div class="filter-option">Xiaomi</div>
+                    <div class="filter-option">Honor</div>
+                    <div class="filter-option">Huawei</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Баға диапазоны</h3>
+                <div class="filter-options">
+                    <div class="filter-option active">Барлығы</div>
+                    <div class="filter-option">200 000 ₸ дейін</div>
+                    <div class="filter-option">200-400 мың ₸</div>
+                    <div class="filter-option">400-600 мың ₸</div>
+                    <div class="filter-option">600 мың ₸ жоғары</div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Жад көлемі</h3>
+                <div class="filter-options">
+                    <div class="filter-option active">Барлығы</div>
+                    <div class="filter-option">64GB</div>
+                    <div class="filter-option">128GB</div>
+                    <div class="filter-option">256GB</div>
+                    <div class="filter-option">512GB және одан жоғары</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Өнімдер тізімі -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products">
+                <!-- Өнім 1 -->
+                <div class="product-card">
+                    <div class="product-image" onclick="openModal('iphone15')">
+                        <img src="data:image/jpeg;base64,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" alt="iPhone 15 Pro Max">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 15 Pro Max 256GB</h3>
+                        <div class="product-price">849 990 ₸</div>
+                        <a href="#" class="product-btn">Сатып алу</a>
+                    </div>
+                </div>
+                
+                <!-- Өнім 2 -->
+                <div class="product-card">
+                    <div class="product-image" onclick="openModal('samsung24')">
+                        <img src="data:image/jpeg;base64,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" alt="Samsung S24 Ultra">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Samsung Galaxy S24 Ultra</h3>
+                        <div class="product-price">799 990 ₸</div>
+                        <a href="#" class="product-btn">Сатып алу</a>
+                    </div>
+                </div>
+                
+                <!-- Өнім 3 -->
+                <div class="product-card">
+                    <div class="product-image" onclick="openModal('xiaomi14')">
+                        <img src="data:image/jpeg;base64,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" alt="Xiaomi 14 Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Xiaomi 14 Pro 12/256GB</h3>
+                        <div class="product-price">449 990 ₸</div>
+                        <a href="#" class="product-btn">Сатып алу</a>
+                    </div>
+                </div>
+                
+                <!-- Өнім 4 -->
+                <div class="product-card">
+                    <div class="product-image" onclick="openModal('honor6')">
+                        <img src="data:image/jpeg;base64,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" alt="Honor Magic6 Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Honor Magic6 Pro 12/512GB</h3>
+                        <div class="product-price">549 990 ₸</div>
+                        <a href="#" class="product-btn">Сатып алу</a>
+                    </div>
+                </div>
+                
+                <!-- Өнім 5 -->
+                <div class="product-card">
+                    <div class="product-image" onclick="openModal('iphone14')">
+                        <img src="data:image/jpeg;base64,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" alt="iPhone 14 Pro Max">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 14 Pro Max 128GB</h3>
+                        <div class="product-price">699 990 ₸</div>
+                        <a href="#" class="product-btn">Сатып алу</a>
+                    </div>
+                </div>
+                
+                <!-- Өнім 6 -->
+                <div class="product-card">
+                    <div class="product-image" onclick="openModal('samsung23')">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPDxAPDxAPDw8PDxAPDw8PDw8PDw8PFRUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGg8QFSsdHR83LSstLTUrKy0tKy0rKysrLSstLS0rKzc3Ny0rKzcrNystKysrNSsrNy0vNzc3Ky0rLf/AABEIAMoA+QMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAAAAQIDBAUGB//EAEAQAAIBAgIFCAYIBQUBAAAAAAABAgMRBBIFITFBsRMiMlFhcXKBIzORocHCBhRCYnOCsvAVQ1KDkiRTotHho//EABkBAQEBAQEBAAAAAAAAAAAAAAABAgMEBf/EACARAQEBAQACAgIDAAAAAAAAAAABEQIDISIxEhMEMkH/2gAMAwEAAhEDEQA/APODIjMspDIjAkO5G40BIZXm50VueZvr1Rb1ewyyxFRSkuZqa2KS3Lt7wN4XMKxUuqPtkS+tv+lPzsBtC5kWM+5/yRJYv7r9qYGoDP8AWo9Uv8WxrEx7fYwL7hcpWJh/Ul36iyMk9mtATuIpeIj97yhN/Ai8VHqn/hIK0XC5kljor7NR/lK5aSX+3U88q+Iwbguc2WlrfypP80UVfxht2VKV3sV8zfsGGOsFzivTNT7NHNu2yvfyRXPS9fU3RUE5ZM0s2VSsnbYtdmnYYY7ojDhMXOVSpGWW0ajgsqa1ZbrazbcAuK4CCBiAQAAhAJDIjAkhoiMCQyIwE+nD8/6GYsTNKcr75Je5Gxvnw/ufoZzNKxbc7bYyUl5JAY8Xp2q5PkoQjTjZW5NSvbVd3vtNeDxiqxzWUWtU0tl+tHLjgasr8lHPTqO7tKMWt7Tu9Vus24LCZFKDcW5LnODzRTe5Pfbr6y3Av4zSz5OdZtLPbm34nSPLLRE3PK7JX1vs7EepQuCQyIyCSZtXxfExI2L4viBdV+C4GaoaJPZ3LgQkjF7xtgq3Mk220krttJLrb3HSqUyGCxDw1elXUI1HSmpqE+jJrrE8kMcXESalKLVmm011NOzRkddp3Taa2NOzR0PpBjZYnEVcRKMYSqzzuEL5YuyWq/ccWpI6S6i+ePqbVJppyasktbd3sRBYypJwhKcnFVFJRb1KT1XsZZSI0pc+PiXEo9Vo9+mrfjfIzqXOTo71tb8b5GdUlQXEAiIBAIAAQAIBABJDIjAkMiACfTh+f9DM+IXPl4vgi+T50Pz/AKWYNKSak2t1SLfYtQGfF1sNSk4cpUk9WZwilBPq19Kxow2XLmg8ye/Z7VuZwKlOCjUzNqqqmpNOzg9d7/vajdodSVKX3udC/dZM1Z6HoquNpyoUqCpU41ac5ylWT9JUjLWk12X9yMqPHzbcoODm62vNmWySbtZ71a22x69GbMVMZEaCJI2dfe+JiRs/7fECupiLWt1LgZ5YuX7SI1HwXApkcbY6SLvr8t9n3r/oTxEJbVl7dqMk0VSuYuGL8XhXa61rrWs4WKp2OxRxEovVs3p7GGNwqqRz09u+O8vPeMvNSYUXz4+JcSeIhYqovnx8S4npl0eu0d62r+N8jOocjRj9NWXVUv52aOqxUMVxARAIBAAXEACAQwGMiMCQCABT6UPzcDNjYKU5p7G7P2F83zod8uDMmk62SUn99X9wFUMHUhZSpQko2ceWhTk0nrVs+7eWQUm3Kd3J22/vV3HmcdXlUm5TbbzNK+5LqOxoTESnBqTbyuyb6i2Gtyw8b5ray4iiRAyREYEkat/m+JkRq3+b4gYn8EGQtpRul3IvhSPF33lenmLMJouFShWmpydeHJuFJRtDLKrSpXnJ73ympL+nW9aRfjtCYdcsqdSrD6riI0K9SqozhNS5RcpThCKlFZ6bWV5tUou+1FuCnycK0UnmqwhGMl9lxq06l/8A528zoYrF03yjp0bOvWVevGrJVKbks9oQSSeTNUk9bvqit2vH7IXlxXoOlKMqEFV+uRwdPF55VIcjKU4U6ro5Mt1anUXOzPnReq2yWLwGHgsUqEasZYGvCjVnOopLEwc5U5TUMq5NqcVZXfNlr1rX1Z4iORuNOUcTLD08LKryicOTgoRzKGW+dwpxi3e212u9WbSteNSNbk6LpTxVWNbEydTPGU05Sy045Vki5TcrNt6kr2Wu/t5xi8vF6dwGXnpan0uxvY/M8/TVpx8S4n0SthVOi1JbFll4Xv8AJng8TQcKyi9saiT9u09Hg8n5TGLMei0Z66v41wZ1TlaN9bW7Z8EzqXPRWQAgIgEAgGIQwIgJDAYyIwJARGAn04fm/SzJpOnmdRdurvsjW+lHzKcX6yfi+CA4awNObvOU6bvzlCEambravJWftN+DpRjfInGGpJSeaT623ba//C2VJMsirbBokMiSAYxDAkjTv83xMqNO/wA3xAMJC8Y+FHQpUjPo+HMh4UdahSPleW/KvZzPQw1Nxaktqd0b4zm9do7/ALK323eSJUKJsp0TE1rGW8nfVHXe/MjvKKuEvdva9b7zrxok1QLZb9s2PNrCpNp7JJxfc9R8++kuHy14N7W8svHBpP3ZT6xjMPY+f/TbD2nm6q1KXlONn7zt/Hud449xmwHTqfivgzoXObgX6Sp4vfzjoXPpVyMVwuJkQxAIAABXAQyIwGMiMCQERgK/Ph2t8L/ArxfrJd/wRO/Ph3y/SyGL9ZPv+CAqGhDQDGIYDGIYDRpb1vvfEzIve1974gdPRUPR0/DE7WHpnL0PH0VPwRO7hoHyu58q9vP000KZtp0yujA2Qib55LUYwJKBaokspv8AFm1z8dT1Hz76dU9V+yi/ZVPpGNWo+e/TdarfhL/ncczO45dV57BL0lR/fa/UdAwYPpz8b+Y2n0K5GIBEQxAIBiAQCGRGAxkRgMZEYC+3DvfBkcX6yff8ESXTh3vgyOL9ZLv+CApGIYDGIaAYxDQDRe9r73xKEXS2vvfEDv6EXoaXgjwO/hkcLQa9DS8ETv4c+Z1PlXsl9N9FGqCM1E2U0dOYzanFErDRGbOmMWsWPlqPnX0wqXaXXUXsjq+J73SVTUz5p9I62arbdFped7sn+udrBhenPxv5jaYsL05+N/MbD2VkxAIIYgEAxXAQABLkpdQcnLqAQD5N9QZH1AIYZX1BlYCXTp+J8GLF+sl3/BDS59PxPgxYv1ku/wCCAqGIYAhgCAaGhDQDLpbX3lKLZ7X3gej0H6ml4Infw557QkvQ0/Ajv4eR87r+1eiX06dFGqmYqUy9VDpylrVmKK1QqnXMOKxVltOrFrBp3GqnCUurYuuW5HzPG1byV9rkm323O79IdJ8rO0XzI3t9572eVxNTnx8S4mOZvTLp4bpz8b+Y1mXDLnz8b+Y15WeuoQiWR9Qcm+oIiBLkpdQclLqYEAJ8jLqDkZdTA35Qyl2UWUCnKRcTQ4kXEChxIuJe4icQMdVc+n4nwZTiunLv+CNOJjz6Xj+DM+K6cu9cEBSMBgAwGAAAwBGpQv7TMdOjDUvPiwLtFVrQguqKO5h8QeQwte2rqOpQxZ4Op8q6fk9VTxJpoVVK972Vtnbf3ameXjje0f8AFHB81+T2dhrn0lrvaQrqFnfU03r8n7NaPJ6b0q5Jwi+bve99ncU6T0pOq+c+5K9kcTEVjV9/SM+KqnJlO84+JcTTiqpip9OPiXE7ePnB6XAr0lTxPjI6SiYNHL0tTvfFnWjA7VFagSUC5QJKJEUqBJQLlEaiBTlHlLsoZAI5QsWWDKBXYi4l2UVgKXEi4l7iRcQOfjFzqX4nysyYrpy8uCNuklZ0fxflZjxXTl5cEBUNCGAsoZSQwIqJIBgB1sOuavPizko7OF6EfPiwPPqdpPvZrpVO059V2nLvZZGbOHXj9tOjKv8AvgU1a76/33mZ1C+tTpW1YiOuVrOnUulda9nU7+RJ4xkq1jBXqnQlg4yt/qKCu97mrLrd17jlSidZxgz1NZGjHnx8S4l7gOjT50fEuJ0g9Doxemq974s7CRy9GL/UVu/4s7CiKiKRJIkoklEiI2HYkkOwELDsSsOwCsGUssFgK8oZSywWAqyiyltiE7gcvS+2j+L8rMOJ6b8uCNWkpNzo33VPgzLiem/LggKxiGgGADQAMCLqRW2UV3ySAkjfRxCUba9V+JzoVYvovN4by4HZweDcoZmnru1eLi/YwOZofDU6mLjGr0JPX+9+q7t2Fn0kwtOjiHCkrQs7LMp250kuctT1Ja1qOfiFJTlenVVna7pVEtXbYplXjvevfe6fvLjRsrkiarQeyUf8ok1ZkwZnAhyZtyoWQojo3Rk8TWhRpq86klGK7WX6S0JUwlaEKtrytKLTTTVyzR2Jnh6sK1N2nTlmi+1GvSulKuMq051bXgowja2qKtq1Iorwby4is92a3E7UGmcCon9YrJf7i4M7OGou2slRqsOwRiSSIhWHYaQ7ARsFiVh2ALBYYAKwWJCAVgsOwWA52k8C6mR03FSjK9p3SerrRlnoqo3dunu+1Lq8J2miNgOQtCyf82Ef7cpfMi2Og4760vywjHjc6VgsBjhoSkts6su+UVwii2Oh8OvsyffVqv3ZrGiwAVx0Zh1/JpPtcIyftZfChCPRhCPdGKIBdgXlkXqMl2TUgJsLlUmRAsnSg9sYPvimUTwGHl0qNFvtpwvwLBgZZaJwr/kwXhvHgyqWhcNuhJd1Wqvib7AFcyWg6O51V/cvxRX/AAOKd1Vq6tetU38p17CaGjDhNGxjUlUlJzlLW7pJX67I6GVCiiYRHKFiQ7ARsFiQwIWCxMLARsAwAVgsAAAWGIBWFYkAEbBYkAEbDsMAI2CwxgRsOwwYEWgsMYCsFhggFYLDABWCwwAEhgMAAEABYYgYAOwDA//Z" alt="Samsung S23 Ultra">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Samsung Galaxy S23 Ultra</h3>
+                        <div class="product-price">649 990 ₸</div>
+                        <a href="#" class="product-btn">Сатып алу</a>
+                    </div>
+                </div>
+                
+                <!-- Өнім 7 -->
+                <div class="product-card">
+                    <div class="product-image" onclick="openModal('xiaomi13')">
+                        <img src="data:image/jpeg;base64,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" alt="Xiaomi 13 Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Xiaomi 13 Pro 12/256GB</h3>
+                        <div class="product-price">399 990 ₸</div>
+                        <a href="#" class="product-btn">Сатып алу</a>
+                    </div>
+                </div>
+                
+                <!-- Өнім 8 -->
+                <div class="product-card">
+                    <div class="product-image" onclick="openModal('huawei50')">
+                        <img src="data:image/jpeg;base64,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" alt="Huawei P50 Pro">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Huawei P50 Pro 8/256GB</h3>
+                        <div class="product-price">479 990 ₸</div>
+                        <a href="#" class="product-btn">Сатып алу</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Өнім туралы мәлімет модальды терезелері -->
+    <!-- iPhone 15 Pro Max -->
+    <div id="iphone15" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('iphone15')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                    <img src="data:image/jpeg;base64,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" alt="iPhone 15 Pro Max">
+                </div>
+                <div class="modal-title">
+                    <h2>iPhone 15 Pro Max 256GB</h2>
+                    <div class="modal-price">849 990 ₸</div>
+                    <p>Apple компаниясының флагманы - ең күшті және әдемі iPhone</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-specs">
+                    <h3>Негізгі сипаттамалар</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Экран</td>
+                            <td>6.7" Super Retina XDR, 120Hz</td>
+                        </tr>
+                        <tr>
+                            <td>Процессор</td>
+                            <td>A17 Pro chip</td>
+                        </tr>
+                        <tr>
+                            <td>Жад</td>
+                            <td>256GB</td>
+                        </tr>
+                        <tr>
+                            <td>Камера</td>
+                            <td>48MP + 12MP + 12MP + LiDAR</td>
+                        </tr>
+                        <tr>
+                            <td>Аккумулятор</td>
+                            <td>4422 мАч, 27W зарядтау</td>
+                        </tr>
+                        <tr>
+                            <td>Операциялық жүйе</td>
+                            <td>iOS 17</td>
+                        </tr>
+                        <tr>
+                            <td>Салмағы</td>
+                            <td>221 г</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-specs">
+                    <h3>Қосымша ақпарат</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Түстері</td>
+                            <td>Титан қара, Титан көк, Титан ақ, Титан табиғи</td>
+                        </tr>
+                        <tr>
+                            <td>SIM</td>
+                            <td>eSIM + Nano-SIM</td>
+                        </tr>
+                        <tr>
+                            <td>Байланыс</td>
+                            <td>5G, Wi-Fi 6E, Bluetooth 5.3</td>
+                        </tr>
+                        <tr>
+                            <td>Суға төзімділік</td>
+                            <td>IP68 (6 метрге дейін, 30 минут)</td>
+                        </tr>
+                        <tr>
+                            <td>Гарантия</td>
+                            <td>12 ай</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <a href="#" class="modal-btn">Қазір сатып алу</a>
+                <a href="#" class="modal-btn secondary">Себетке қосу</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Samsung Galaxy S24 Ultra -->
+    <div id="samsung24" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('samsung24')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsNqV2s5adSB1-rApYFUdXbuy-BUHPFR1vsA&s" alt="Samsung S24 Ultra">
+                </div>
+                <div class="modal-title">
+                    <h2>Samsung Galaxy S24 Ultra 12/256GB</h2>
+                    <div class="modal-price">799 990 ₸</div>
+                    <p>Samsung-дың флагмандық смартфоны - ең жақсы Android телефон</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-specs">
+                    <h3>Негізгі сипаттамалар</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Экран</td>
+                            <td>6.8" Dynamic AMOLED 2X, 120Hz</td>
+                        </tr>
+                        <tr>
+                            <td>Процессор</td>
+                            <td>Snapdragon 8 Gen 3</td>
+                        </tr>
+                        <tr>
+                            <td>Жад</td>
+                            <td>12GB RAM / 256GB</td>
+                        </tr>
+                        <tr>
+                            <td>Камера</td>
+                            <td>200MP + 50MP + 12MP + 10MP</td>
+                        </tr>
+                        <tr>
+                            <td>Аккумулятор</td>
+                            <td>5000 мАч, 45W зарядтау</td>
+                        </tr>
+                        <tr>
+                            <td>Операциялық жүйе</td>
+                            <td>Android 14 (One UI 6.1)</td>
+                        </tr>
+                        <tr>
+                            <td>Салмағы</td>
+                            <td>233 г</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-specs">
+                    <h3>Қосымша ақпарат</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Түстері</td>
+                            <td>Титан қара, Титан сары, Титан күлгін, Титан көк</td>
+                        </tr>
+                        <tr>
+                            <td>SIM</td>
+                            <td>Dual SIM (Nano-SIM)</td>
+                        </tr>
+                        <tr>
+                            <td>Байланыс</td>
+                            <td>5G, Wi-Fi 6E, Bluetooth 5.3</td>
+                        </tr>
+                        <tr>
+                            <td>Суға төзімділік</td>
+                            <td>IP68 (1.5 метрге дейін, 30 минут)</td>
+                        </tr>
+                        <tr>
+                            <td>Гарантия</td>
+                            <td>24 ай</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <a href="#" class="modal-btn">Қазір сатып алу</a>
+                <a href="#" class="modal-btn secondary">Себетке қосу</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Xiaomi 14 Pro -->
+    <div id="xiaomi14" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('xiaomi14')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                    <img src="data:image/jpeg;base64,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" alt="Xiaomi 14 Pro">
+                </div>
+                <div class="modal-title">
+                    <h2>Xiaomi 14 Pro 12/256GB</h2>
+                    <div class="modal-price">449 990 ₸</div>
+                    <p>Xiaomi-дің жаңа флагманы - үнемділік пен өнімділіктің үйлесімі</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-specs">
+                    <h3>Негізгі сипаттамалар</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Экран</td>
+                            <td>6.73" AMOLED, 120Hz</td>
+                        </tr>
+                        <tr>
+                            <td>Процессор</td>
+                            <td>Snapdragon 8 Gen 3</td>
+                        </tr>
+                        <tr>
+                            <td>Жад</td>
+                            <td>12GB RAM / 256GB</td>
+                        </tr>
+                        <tr>
+                            <td>Камера</td>
+                            <td>50MP + 50MP + 50MP</td>
+                        </tr>
+                        <tr>
+                            <td>Аккумулятор</td>
+                            <td>4880 мАч, 120W зарядтау</td>
+                        </tr>
+                        <tr>
+                            <td>Операциялық жүйе</td>
+                            <td>Android 14 (HyperOS)</td>
+                        </tr>
+                        <tr>
+                            <td>Салмағы</td>
+                            <td>223 г</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-specs">
+                    <h3>Қосымша ақпарат</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Түстері</td>
+                            <td>Қара, Көк, Жасыл, Ақ</td>
+                        </tr>
+                        <tr>
+                            <td>SIM</td>
+                            <td>Dual SIM (Nano-SIM)</td>
+                        </tr>
+                        <tr>
+                            <td>Байланыс</td>
+                            <td>5G, Wi-Fi 7, Bluetooth 5.4</td>
+                        </tr>
+                        <tr>
+                            <td>Суға төзімділік</td>
+                            <td>IP68 (1.5 метрге дейін, 30 минут)</td>
+                        </tr>
+                        <tr>
+                            <td>Гарантия</td>
+                            <td>18 ай</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <a href="#" class="modal-btn">Қазір сатып алу</a>
+                <a href="#" class="modal-btn secondary">Себетке қосу</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Honor Magic6 Pro -->
+    <div id="honor6" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('honor6')">&times;</span>
+            <div class="modal-header">
+                <div class="modal-image">
+                    <img src="data:image/jpeg;base64,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" alt="Honor Magic6 Pro">
+                </div>
+                <div class="modal-title">
+                    <h2>Honor Magic6 Pro 12/512GB</h2>
+                    <div class="modal-price">549 990 ₸</div>
+                    <p>Honor-дың жаңа флагманы - инновациялық камера жүйесі</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-specs">
+                    <h3>Негізгі сипаттамалар</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Экран</td>
+                            <td>6.8" OLED, 120Hz</td>
+                        </tr>
+                        <tr>
+                            <td>Процессор</td>
+                            <td>Snapdragon 8 Gen 3</td>
+                        </tr>
+                        <tr>
+                            <td>Жад</td>
+                            <td>12GB RAM / 512GB</td>
+                        </tr>
+                        <tr>
+                            <td>Камера</td>
+                            <td>50MP + 180MP + 50MP</td>
+                        </tr>
+                        <tr>
+                            <td>Аккумулятор</td>
+                            <td>5600 мАч, 80W зарядтау</td>
+                        </tr>
+                        <tr>
+                            <td>Операциялық жүйе</td>
+                            <td>Android 14 (MagicOS 8.0)</td>
+                        </tr>
+                        <tr>
+                            <td>Салмағы</td>
+                            <td>225 г</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-specs">
+                    <h3>Қосымша ақпарат</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Түстері</td>
+                            <td>Қара, Көк, Күміс, Жасыл</td>
+                        </tr>
+                        <tr>
+                            <td>SIM</td>
+                            <td>Dual SIM (Nano-SIM)</td>
+                        </tr>
+                        <tr>
+                            <td>Байланыс</td>
+                            <td>5G, Wi-Fi 7, Bluetooth 5.3</td>
+                        </tr>
+                        <tr>
+                            <td>Суға төзімділік</td>
+                            <td>IP68 (1.5 метрге дейін, 30 минут)</td>
+                        </tr>
+                        <tr>
+                            <td>Гарантия</td>
+                            <td>18 ай</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <a href="#" class="modal-btn">Қазір сатып алу</a>
+                <a href="#" class="modal-btn secondary">Себетке қосу</a>
+            </div>
+        </div>
+    </div>
+    <div id="iphone14promax" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('iphone14promax')">&times;</span>
+        <div class="modal-header">
+            <div class="modal-title">
+                <h2>iPhone 14 Pro Max 128GB</h2>
+                <div class="modal-price">749 990 ₸</div>
+                <p>Apple компаниясының флагманы - күшті және әдемі iPhone</p>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="modal-specs">
+                <h3>Негізгі сипаттамалар</h3>
+                <table class="specs-table">
+                    <tr>
+                        <td>Экран</td>
+                        <td>6.7" Super Retina XDR, 120Hz</td>
+                    </tr>
+                    <tr>
+                        <td>Процессор</td>
+                        <td>A16 Bionic chip</td>
+                    </tr>
+                    <tr>
+                        <td>Жад</td>
+                        <td>128GB</td>
+                    </tr>
+                    <tr>
+                        <td>Камера</td>
+                        <td>48MP + 12MP + 12MP</td>
+                    </tr>
+                    <tr>
+                        <td>Аккумулятор</td>
+                        <td>4323 мАч, 27W зарядтау</td>
+                    </tr>
+                    <tr>
+                        <td>Операциялық жүйе</td>
+                        <td>iOS 16</td>
+                    </tr>
+                    <tr>
+                        <td>Салмағы</td>
+                        <td>240 г</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-specs">
+                <h3>Қосымша ақпарат</h3>
+                <table class="specs-table">
+                    <tr>
+                        <td>Түстері</td>
+                        <td>Қара, Күміс, Алтын, Көк</td>
+                    </tr>
+                    <tr>
+                        <td>SIM</td>
+                        <td>eSIM + Nano-SIM</td>
+                    </tr>
+                    <tr>
+                        <td>Байланыс</td>
+                        <td>5G, Wi-Fi 6E, Bluetooth 5.3</td>
+                    </tr>
+                    <tr>
+                        <td>Суға төзімділік</td>
+                        <td>IP68 (6 метрге дейін, 30 минут)</td>
+                    </tr>
+                    <tr>
+                        <td>Гарантия</td>
+                        <td>12 ай</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Marat.kz.kz</h3>
+                    <p>Қазақстандағы смартфондардың ірі онлайн дүкені. Біз тек сертификатталған өнімдерді ұсынамыз.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ақпарат</h3>
+                    <ul>
+                        <li><a href="#">Біз туралы</a></li>
+                        <li><a href="#">Жеткізу және төлеу</a></li>
+                        <li><a href="#">Кепілдік</a></li>
+                        <li><a href="#">Конфиденциальность</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Көмек</h3>
+                    <ul>
+                        <li><a href="#">Жиі қойылатын сұрақтар</a></li>
+                        <li><a href="#">Сатып алушыға көмек</a></li>
+                        <li><a href="#">Өнімді қайтару</a></li>
+                        <li><a href="#">Байланыс</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Байланыс</h3>
+                    <ul>
+                        <li>Телефон: +7 (705) 224 9007</li>
+                        <li>Алматы, Абай көш. 10</li>
+                        <li>Дүйсенбі-Жұма: 9:00 - 20:00</li>
+                        <li>Сенбі-Жексенбі: 10:00 - 18:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Marat.kz - Барлық құқықтар қорғалған
+            </div>
+        </div>
+        <div id="iphone14promax" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('iphone14promax')">&times;</span>
+        <div class="modal-header">
+            <div class="modal-title">
+                <h2>iPhone 14 Pro Max 128GB</h2>
+                <div class="modal-price">749 990 ₸</div>
+                <p>Apple компаниясының флагманы - күшті және әдемі iPhone</p>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="modal-specs">
+                <h3>Негізгі сипаттамалар</h3>
+                <table class="specs-table">
+                    <tr>
+                        <td>Экран</td>
+                        <td>6.7" Super Retina XDR, 120Hz</td>
+                    </tr>
+                    <tr>
+                        <td>Процессор</td>
+                        <td>A16 Bionic chip</td>
+                    </tr>
+                    <tr>
+                        <td>Жад</td>
+                        <td>128GB</td>
+                    </tr>
+                    <tr>
+                        <td>Камера</td>
+                        <td>48MP + 12MP + 12MP</td>
+                    </tr>
+                    <tr>
+                        <td>Аккумулятор</td>
+                        <td>4323 мАч, 27W зарядтау</td>
+                    </tr>
+                    <tr>
+                        <td>Операциялық жүйе</td>
+                        <td>iOS 16</td>
+                    </tr>
+                    <tr>
+                        <td>Салмағы</td>
+                        <td>240 г</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-specs">
+                <h3>Қосымша ақпарат</h3>
+                <table class="specs-table">
+                    <tr>
+                        <td>Түстері</td>
+                        <td>Қара, Күміс, Алтын, Көк</td>
+                    </tr>
+                    <tr>
+                        <td>SIM</td>
+                        <td>eSIM + Nano-SIM</td>
+                    </tr>
+                    <tr>
+                        <td>Байланыс</td>
+                        <td>5G, Wi-Fi 6E, Bluetooth 5.3</td>
+                    </tr>
+                    <tr>
+                        <td>Суға төзімділік</td>
+                        <td>IP68 (6 метрге дейін, 30 минут)</td>
+                    </tr>
+                    <tr>
+                        <td>Гарантия</td>
+                        <td>12 ай</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    </footer>
+    
+    <script>
+        // Модальды терезені ашу функциясы
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden"; // Скроллды өшіру
+        }
+        
+        // Модальды терезені жабу функциясы
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto"; // Скроллды қалпына келтіру
+        }
+        
+        // Модальды терезенің сыртын басқанда жабу
+        window.onclick = function(event) {
+            if (event.target.className === "modal") {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+        
+        // Фильтр опцияларын белсендіру
+        document.querySelectorAll('.filter-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Әр фильтр тобында тек бір опция белсенді болуы үшін
+                const parentGroup = this.closest('.filter-group');
+                parentGroup.querySelectorAll('.filter-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

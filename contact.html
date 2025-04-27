@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marat.kz - Баланс</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        /* Header стилі */
+        header {
+            background: linear-gradient(90deg, #6e8efb, #a777e3);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        header .search-bar {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        header .search-bar input {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        header .search-bar button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        header .search-bar button:hover {
+            background-color: #218838;
+        }
+
+        /* Навигация */
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #6e8efb;
+        }
+
+        /* Баланс бөлімі */
+        .balance-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .balance-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .balance-info {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .balance-info h3 {
+            font-size: 24px;
+            color: #6e8efb;
+            margin-bottom: 10px;
+        }
+
+        .balance-info p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .top-up-form {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .top-up-form h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .top-up-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .top-up-form input,
+        .top-up-form select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .top-up-form button {
+            padding: 10px 20px;
+            background-color: #6e8efb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .top-up-form button:hover {
+            background-color: #5a7df5;
+        }
+
+        .history-table {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .history-table h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .history-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .history-table th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        /* Бонус бағдарламасы */
+        .bonus-program {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .bonus-program h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .bonus-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .bonus-card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .bonus-card p {
+            font-size: 16px;
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Рахмет ұпайлары */
+        .thank-you-points {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .thank-you-points h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .points-card {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+        }
+
+        .points-card h4 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .points-card p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .points-card .highlight {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffeb3b;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer стилі */
+        footer {
+            background-color: #222;
+            padding: 40px 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #fff6f6;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-section a:hover {
+            color: #6e8efb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Marat.kz</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Товарды іздеу...">
+            <button>Іздеу</button>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Басты бет</a></li>
+            <li><a href="smartphones.html" class="active">Смартфондар</a></li>
+            <li><a href="accessories.html">Аксессуарлар</a></li>
+            <li><a href="delivery.html">Жедел қызмет</a></li>
+            <li><a href="contact.html">Байланыс</a></li>
+        </ul>
+    </nav>
+
+    <!-- Баланс бөлімі -->
+    <section class="balance-section">
+        <h2>Сіздің балансыңыз</h2>
+        <div class="balance-info">
+            <h3>Қазіргі баланс: 25 000 ₸</h3>
+            <p>Сіздің балансыңызды толтырып, сатып алуды жалғастырыңыз!</p>
+        </div>
+
+        <div class="top-up-form">
+            <h4>Балансты толтыру</h4>
+            <form>
+                <input type="number" placeholder="Соманы енгізіңіз (₸)" required>
+                <select required>
+                    <option value="">Төлем әдісін таңдаңыз</option>
+                    <option value="card">Банк картасы</option>
+                    <option value="kaspi">Kaspi QR</option>
+                    <option value="mobile">Мобильді төлем</option>
+                </select>
+                <button type="submit">Толтыру</button>
+            </form>
+        </div>
+
+        <div class="history-table">
+            <h4>Толтыру тарихы</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Күні</th>
+                        <th>Сома</th>
+                        <th>Төлем әдісі</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>22.04.2025</td>
+                        <td>10 000 ₸</td>
+                        <td>Банк картасы</td>
+                    </tr>
+                    <tr>
+                        <td>20.04.2025</td>
+                        <td>15 000 ₸</td>
+                        <td>Kaspi QR</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Бонус бағдарламасы -->
+    <section class="bonus-program">
+        <h3>Бонус бағдарламасы</h3>
+        <div class="bonus-grid">
+            <div class="bonus-card">
+                <h4>50 000 ₸ толтыру</h4>
+                <p>+5 000 ₸ бонус</p>
+            </div>
+            <div class="bonus-card">
+                <h4>100 000 ₸ толтыру</h4>
+                <p>+12 000 ₸ бонус</p>
+            </div>
+            <div class="bonus-card">
+                <h4>200 000 ₸ толтыру</h4>
+                <p>+30 000 ₸ бонус</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Рахмет ұпайлары -->
+    <section class="thank-you-points">
+        <h3>Рахмет ұпайлары</h3>
+        <div class="points-card">
+            <h4>Рахмет!</h4>
+            <p>Балансты әр толтырғанда ұпай жинаңыз.</p>
+            <p class="highlight">1 000 ₸ = 10 ұпай</p>
+            <p>Жинаған ұпайларыңызды келесі сатып алуларда жеңілдік ретінде пайдаланыңыз!</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Marat.kz</h4>
+                <p>Смартфондар мен аксессуарларды сатып алуға арналған ең үздік дүкен.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Аймақтар</h4>
+                <a href="#">Алматы</a>
+                <a href="#">Астана</a>
+                <a href="#">Шымкент</a>
+                <a href="#">Қарағанды</a>
+            </div>
+            <div class="footer-section">
+                <h4>Қызметтер</h4>
+                <a href="#">Жеткізу шарттары</a>
+                <a href="#">Қайтару саясаты</a>
+                <a href="#">Кепілдік</a>
+            </div>
+            <div class="footer-section">
+                <h4>Байланыс</h4>
+                <p>Телефон:+7 (705) 224 9007</p>
+                <p>Электрондық пошта: marat@smartphone.kz</p>
+                <p>Мекенжай: Алматы, Абай көшесі 10</p>
+                <p>Жұмыс уақыты: Дүйсенбі-Жексенбі: 10:00-20:00</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
